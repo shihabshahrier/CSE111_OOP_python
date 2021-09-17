@@ -1,0 +1,49 @@
+#problem 05
+
+class Exam:
+    def __init__(self,marks):
+        self.marks = marks
+        self.time = 60
+    def examSyllabus(self):
+        return "Maths , English"
+    def examParts(self):
+        return "Part 1 - Maths\nPart 2 - English\n"
+    
+class ScienceExam(Exam):
+
+    def __init__(self, mark, time, *subjects):
+        self.mark = mark
+        self.time = time
+        self.subject = subjects
+        self.taken_sub = self.examSyllabus().split(' , ')
+        for i in self.subject:
+            self.taken_sub.append(i)
+        self.subNum = len(self.taken_sub)
+    def examSyllabus(self):
+
+        xmSy = ""
+        for i in self.taken_sub:
+            xmSy += i.join(" ,")
+            
+        return xmSy
+
+    def examParts(self):
+        xmp = ""
+        for i in range(len(self.taken_sub)):
+            xmSy += f"\nPart {i} - {self.taken_sub[i]}"   
+        return xmp
+    def __str__(self):
+        return f"Marks: {self.mark} Time: {self.time} Number of Parts:{self.subNum}"
+        
+
+engineering = ScienceExam(100,90,"Physics","HigherMaths")
+print(engineering)
+print('----------------------------------')
+print(engineering.examSyllabus())
+print(engineering.examParts())
+print('==================================')
+architecture = ScienceExam(100,120,"Physics","HigherMaths","Drawing")
+print(architecture)
+print('----------------------------------')
+print(architecture.examSyllabus())
+print(architecture.examParts())
